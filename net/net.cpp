@@ -759,7 +759,7 @@ int DNS_lookup(const char *domain_name, ip_lookup_t *r_ips, const char *ip_backu
     char **ip_list = r_ips->ip_list;
 
     asprintf(&cmd_p, "dig +short +noedns +time=2 +tries=2 %s A %s AAAA", domain_name, domain_name);
-    //printf("LOOKUP: \"%s\" <%s>\n", domain_name, cmd_p);
+    lprintf("LOOKUP: \"%s\" <%s>\n", domain_name, cmd_p);
 	kstr_t *reply = non_blocking_cmd(cmd_p, &status);
 	
 	if (reply != NULL && status >= 0 && WEXITSTATUS(status) == 0) {
@@ -772,8 +772,9 @@ int DNS_lookup(const char *domain_name, ip_lookup_t *r_ips, const char *ip_backu
             ip_list[i] = strndup(ips[i].str, NET_ADDRSTRLEN);
             int slen = strlen(ip_list[i]);
             if (ip_list[i][slen-1] == '\n') ip_list[i][slen-1] = '\0';    // remove trailing \n
-	        printf("LOOKUP: \"%s\" %s\n", domain_name, ip_list[i]);
-	        r_ips->ip[i] = inet4_d2h_strict(ip_list[i]);
+            u4_t r = inet4_d2h_strict(ip_list[i]);
+	        lprintf("LOOKUP: \"%s\" %s %d\n", domain_name, ip_list[i], (unsigned)r);
+	        r_ips->ip[i] = r;
         }
         
         kiwi_ifree(r_buf, "DNS_lookup");
@@ -793,6 +794,13 @@ int DNS_lookup(const char *domain_name, ip_lookup_t *r_ips, const char *ip_backu
 	kiwi_asfree(cmd_p);
 	kstr_free(reply);
     r_ips->n_ips = n;
+    lprintf("LOOKUP: r_ips->valid = %d\n", (int)r_ips->valid);
+    lprintf("LOOKUP: r_ips->backup = %d\n", (int)r_ips->backup);
+    lprintf("LOOKUP: r_ips->n_ips = %d\n", r_ips->n_ips);
+    for (i = 0; i < r_ips->n_ips; i++) {
+        lprintf("LOOKUP: i_ips->ip_list[%d] = %s\n", i, r_ips->ip_list[i]);
+        lprintf("LOOKUP: i_ips->ip[%d] = %u\n", i, (unsigned)r_ips->ip[i]);
+    }
 	return n;
 }
 
