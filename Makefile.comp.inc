@@ -261,6 +261,8 @@ ifeq ($(DEBIAN_DEVSYS),$(DEBIAN))
         DEB := D11
     else ifeq ($(DEBIAN_VERSION),12)
         DEB := D12
+    else ifeq ($(DEBIAN_VERSION),13)
+        DEB := D12
     else
         BAD_DEB_DETECT := true
     endif
