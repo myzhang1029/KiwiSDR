@@ -2019,15 +2019,15 @@ clean_deprecated:
 	-rm -rf *.dSYM pas extensions/ext_init.cpp kiwi.gen.h kiwid kiwid.aout kiwid_realtime.bin .comp_ctr
 
 clean: $(KEYRING) clean_ext clean_deprecated $(DEP_LFTP)
-	(cd $(REPO_DIR)/e_cpu; make clean)
-	(cd $(REPO_DIR)/verilog/rx; make clean)
-	(cd $(REPO_DIR)/tools; make clean)
-	(cd $(REPO_DIR)/pkgs/noip2; make clean)
-	(cd $(REPO_DIR)/pkgs/EiBi; make clean)
-	-rm -rf $(TOOLS_DIR)/file_optim
-	# but not $(KEEP_DIR)
-	-rm -rf $(LOG_FILE) $(BUILD_DIR)/kiwi* $(GEN_DIR) $(OBJ_DIR) $(OBJ_DIR_O3)
-	-rm -f Makefile.1
+	#(cd $(REPO_DIR)/e_cpu; make clean)
+	#(cd $(REPO_DIR)/verilog/rx; make clean)
+	#(cd $(REPO_DIR)/tools; make clean)
+	#(cd $(REPO_DIR)/pkgs/noip2; make clean)
+	#(cd $(REPO_DIR)/pkgs/EiBi; make clean)
+	#-rm -rf $(TOOLS_DIR)/file_optim
+	## but not $(KEEP_DIR)
+	#-rm -rf $(LOG_FILE) $(BUILD_DIR)/kiwi* $(GEN_DIR) $(OBJ_DIR) $(OBJ_DIR_O3)
+	#-rm -f Makefile.1
     ifeq ($(REBASE_DISTRO),true)
 	    @echo
 	    @echo "update $(DIR_FILE_SRC) for BINARY_INSTALL"
