@@ -706,8 +706,8 @@ bool isLocal_ip(char *ip_str, bool *is_loopback, u4_t *ipv4, bool *error, bool *
         }
         
         if (
-            (ip >= INET4_DTOH(10,0,0,0) && ip <= INET4_DTOH(10,255,255,255)) ||
-            (ip >= INET4_DTOH(172,16,0,0) && ip <= INET4_DTOH(172,31,255,255)) ||
+            //(ip >= INET4_DTOH(10,0,0,0) && ip <= INET4_DTOH(10,255,255,255)) ||
+            //(ip >= INET4_DTOH(172,16,0,0) && ip <= INET4_DTOH(172,31,255,255)) ||
             (ip >= INET4_DTOH(192,168,0,0) && ip <= INET4_DTOH(192,168,255,255)) ) {
             if (ipv4) *ipv4 = ip;
             return true;    // is a local IP (*error set false)
@@ -721,8 +721,8 @@ bool isLocal_ip(char *ip_str, bool *is_loopback, u4_t *ipv4, bool *error, bool *
         // ipv6
         if (is_loopback)
             *is_loopback = (strcmp(ip_str, "::1") == 0 || strcmp(ip_str, ":0:0:0:0:0:0:0:1") == 0);
-        if (strncasecmp(ip_str, "fd", 2) == 0)
-            return true;    // is a local IP (*error set false)
+        //if (strncasecmp(ip_str, "fd", 2) == 0)
+        //    return true;    // is a local IP (*error set false)
     }
     
     return false;   // is not a local IP (*error set false)
