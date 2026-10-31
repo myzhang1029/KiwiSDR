@@ -1380,7 +1380,7 @@ ifeq ($(DEBIAN_DEVSYS),$(DEBIAN))
             # NB: source file extension change .dts => .dtso
             DTS = cape-bone-kiwi-00A0.dtso
             DIR_DTS = platform/beaglebone_black/D12
-            DIR_DTB_BASE = $(wildcard /opt/source/dtb-$(SYS_MAJ).$(SYS_MIN)\.*)
+            DIR_DTB_BASE = $(wildcard /opt/source/dtb-$(SYS_MAJ).$(SYS_MIN)-*)
             DIR_DTB = $(DIR_DTB_BASE)/src/arm/overlays
             DTS_DEP_DST = $(addprefix $(DIR_DTB)/,$(DTS))
         else
