@@ -89,7 +89,7 @@ typedef enum { IPV_NONE = 0, IPV4 = 4, IPV6 = 6 } ipv46_e;
 typedef struct {
     bool valid, backup;
     int n_ips;
-	#define N_IPS 4
+	#define N_IPS 12
 	char *ip_list[N_IPS];
 	u4_t ip[N_IPS];
 } ip_lookup_t;
